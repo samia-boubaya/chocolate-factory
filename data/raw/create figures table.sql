@@ -1,6 +1,8 @@
 USE mckinsey -- USE schema_name
 CREATE TABLE  `Financial Figures`(
 `Financial Figures ID` char(50),  -- primary key
+-- I need to generate it using Date and Customer ID
+
 `Order ID` char(50), -- foreign key from Order
 `Product ID` char(50), -- foreign key from Product
 `Factory ID` char(50), -- foreign key from Factory
