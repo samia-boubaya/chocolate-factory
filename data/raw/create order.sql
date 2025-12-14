@@ -10,6 +10,13 @@ CREATE TABLE `order` (
         REFERENCES `wonka_choc_factory` (`Customer ID`)
 );
 
+-- comment
+SELECT 
+    *,
+    CONCAT(CAST("Order Date" AS VARCHAR), '_', CAST("Customer ID" AS VARCHAR), '_', CAST("Product ID" AS VARCHAR)) AS "Order ID"
+FROM wonka_choc_factory;
+
+
 -- create table wonka
 CREATE TABLE `wonka` (
 	SELECT * FROM `wonka_choc_factory`

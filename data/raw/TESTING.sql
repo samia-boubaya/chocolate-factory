@@ -1,4 +1,47 @@
 -- -----------------------------------------------------------------------------------------------------------------------------
+-- CREATE TABLE Financial Figures  ---------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------
+USE mckinsey;
+
+CREATE TABLE `Financial Figures` (
+  `Units` INT,
+  `Sales` FLOAT,
+  `Cost` FLOAT,
+  `Gross Profit` FLOAT,
+
+  `Order ID` CHAR(100),
+  `Product ID` CHAR(100),
+  `Factory ID` CHAR(100),
+
+  -- `Financial Figures ID` CHAR(100),
+  -- PRIMARY KEY (`Financial Figures ID`) -- ,
+  
+-- CONSTRAINT `order_figures`
+-- FOREIGN KEY (`Order ID`) REFERENCES `Order` (`Order ID`),
+
+	-- CONSTRAINT `product_figures`
+    -- FOREIGN KEY (`Product ID`) REFERENCES `Product` (`Product ID`),
+
+	-- CONSTRAINT `factory_figures`
+    -- FOREIGN KEY (`Factory ID`) REFERENCES `Factory` (`Factory ID`)
+);
+
+ALTER TABLE `Financial Figures` -- add primary key
+ADD PRIMARY KEY (`Financial Figures ID`);
+
+ALTER TABLE `Financial Figures` -- add FK Order ID
+ADD CONSTRAINT `order_figures`
+FOREIGN KEY (`Order ID`) REFERENCES `Order` (`Order ID`);
+
+ALTER TABLE `Financial Figures` -- add FK Product ID
+ADD CONSTRAINT `product_figures`
+FOREIGN KEY (`Product ID`) REFERENCES `Product` (`Product ID`);
+
+ALTER TABLE `Financial Figures` -- add FK Factory ID
+ADD CONSTRAINT `factory_figures`
+FOREIGN KEY (`Factory ID`) REFERENCES `Factory` (`Factory ID`);
+
+-- -----------------------------------------------------------------------------------------------------------------------------
 -- CREATE TABLE Order  ---------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------
 USE mckinsey;
@@ -14,7 +57,7 @@ CREATE TABLE `order` (
 
 INSERT INTO `order` (`Order ID`, `Order Date`, `Customer ID`, `Ship Date`, `Ship Mode`)
 SELECT 
-    CONCAT(CAST(`Order Date` AS CHAR), '_', CAST(`Customer ID` AS CHAR), '_', CAST(`Product ID` AS CHAR)) AS `Order ID`,
+    CONCAT(CAST(`Order Date` AS CHAR), '_', CAST(`Customer ID` AS CHAR), '_', CAST(`Product Name` AS CHAR)) AS `Order ID`,
     `Order Date`,
     `Customer ID`,
     `Ship Date`,
@@ -99,8 +142,6 @@ SELECT
     `Product Name` FROM wonka_choc_factory;
 
 -- Product  INSERT--------------------------------------------------------------------------------------------------------------------------------
-
-
 -- Populate the table with data from wonka_choc_factory, generating Order ID
 INSERT INTO `order` (`Order ID`, `Order Date`, `Customer ID`, `Ship Date`, `Ship Mode`)
 SELECT 
